@@ -151,7 +151,7 @@ async function getToken(id: string, chainId: number): Promise<Token> {
     id: `${chainId}-${id.toLowerCase()}`,
     symbol: tokenMetadata.symbol,
     name: tokenMetadata.name,
-    decimals: tokenMetadata.decimals,
+    decimals: BigInt(tokenMetadata.decimals),
     isWhitelisted: isAddressInList(id, whitelistTokens),
     volume: ZERO_BD,
     volumeUSD: ZERO_BD,

@@ -16343,5 +16343,10 @@
     "name": "S4FE",
     "symbol": "S4F",
     "decimals": 18
+  },
+  "0x7dFB72A2AAd08C937706f21421B15bFC34Cba9ca": {
+    "name": "Mulan.Finance",
+    "symbol": "$MULAN",
+    "decimals": 18
   }
 }

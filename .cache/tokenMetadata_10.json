@@ -1133,5 +1133,105 @@
     "name": "Sarcophagus",
     "symbol": "SARCO",
     "decimals": "18"
+  },
+  "0xBBC9Ef6d88755bc816532367AF4554f804f33091": {
+    "name": "OVM1",
+    "symbol": "OVM1",
+    "decimals": 8
+  },
+  "0xCAE1fC5f1bAA36B9BF67Ec47E68E0428175c7D20": {
+    "name": "OVM2",
+    "symbol": "OVM2",
+    "decimals": 8
+  },
+  "0x054FA6DC78dd2492072aa475C1b200D5e8787323": {
+    "name": "OVM1",
+    "symbol": "OVM1",
+    "decimals": 8
+  },
+  "0x441cf0736C407092042C5E26c58a679216994D1B": {
+    "name": "OVM2",
+    "symbol": "OVM2",
+    "decimals": 8
+  },
+  "0xc7b04dC5A2644522a0C58c107346B5e3A63600B0": {
+    "name": "Sarcophagus",
+    "symbol": "SARCO",
+    "decimals": 18
+  },
+  "0xF98dCd95217E15E05d8638da4c91125E59590B07": {
+    "name": "Kromatika",
+    "symbol": "KROM",
+    "decimals": 18
+  },
+  "0xab3F8a9599D62f09A71d7337dFfF4458a4C7fe27": {
+    "name": "vETH",
+    "symbol": "vETH",
+    "decimals": 18
+  },
+  "0xDb21BB0389b616BB2EBDE855975Df4F2Ce9fB74F": {
+    "name": "vUSD",
+    "symbol": "vUSD",
+    "decimals": 18
+  },
+  "0x64b18e6d7B4693F86Aa12c1724f1E195232bF044": {
+    "name": "vBTC",
+    "symbol": "vBTC",
+    "decimals": 18
+  },
+  "0x00F932F0FE257456b32dedA4758922E56A4F4b42": {
+    "name": "Paper",
+    "symbol": "PAPER",
+    "decimals": 18
+  },
+  "0x28D8a1a6BDEAF9d42dA6A55da8a34710e3434B97": {
+    "name": "vETH",
+    "symbol": "vETH",
+    "decimals": 18
+  },
+  "0xE402d5eef58aad816D7240e50F20922F53A81711": {
+    "name": "vUSD",
+    "symbol": "vUSD",
+    "decimals": 18
+  },
+  "0x0a03498EC169247F81761D9b67BF5B206fF0c0Fc": {
+    "name": "vBTC",
+    "symbol": "vBTC",
+    "decimals": 18
+  },
+  "0x65559aA14915a70190438eF90104769e5E890A00": {
+    "name": "Ethereum Name Service",
+    "symbol": "ENS",
+    "decimals": 18
+  },
+  "0xc98B98d17435AA00830c87eA02474C5007E1f272": {
+    "name": "BitBTC",
+    "symbol": "BitBTC",
+    "decimals": 18
+  },
+  "0x5029C236320b8f15eF0a657054B84d90bfBEDED3": {
+    "name": "BitANT",
+    "symbol": "BitANT",
+    "decimals": 18
+  },
+  "0x8C835DFaA34e2AE61775e80EE29E2c724c6AE2BB": {
+    "name": "vETH",
+    "symbol": "vETH",
+    "decimals": 18
+  },
+  "0xC84Da6c8ec7A57cD10B939E79eaF9d2D17834E04": {
+    "name": "vUSD",
+    "symbol": "vUSD",
+    "decimals": 18
+  },
+  "0x86f1e0420c26a858fc203A3645dD1A36868F18e5": {
+    "name": "vBTC",
+    "symbol": "vBTC",
+    "decimals": 18
+  },
+  "0x7c6b91D9Be155A6Db01f749217d76fF02A7227F2": {
+    "name": "Sarcophagus",
+    "symbol": "SARCO",
+    "decimals": 18
   }
 }

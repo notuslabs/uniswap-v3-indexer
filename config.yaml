@@ -37,21 +37,21 @@ contracts:
             - from
 
 networks:
-  # - id: 1 # Ethereum Mainnet
-  #   start_block: 0
-  #   contracts:
-  #     - name: UniswapV3Factory
-  #       address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
-  #     - name: UniswapV3Pool
+  - id: 1 # Ethereum Mainnet
+    start_block: 0
+    contracts:
+      - name: UniswapV3Factory
+        address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
+      - name: UniswapV3Pool
   - id: 42161 # Arbitrum One
     start_block: 0
     contracts:
       - name: UniswapV3Factory
         address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
       - name: UniswapV3Pool
-  # - id: 10 # Optimism
-  #   start_block: 0
-  #   contracts:
-  #     - name: UniswapV3Factory
-  #       address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
-  #     - name: UniswapV3Pool
+  - id: 10 # Optimism
+    start_block: 0
+    contracts:
+      - name: UniswapV3Factory
+        address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
+      - name: UniswapV3Pool

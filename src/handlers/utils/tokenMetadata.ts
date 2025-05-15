@@ -1,5 +1,6 @@
 import { createPublicClient, http, getContract, type PublicClient } from "viem";
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 import { ADDRESS_ZERO } from "./constants";
 import { getChainConfig } from "./chains";
@@ -117,13 +118,16 @@ const getClient = (chainId: number): PublicClient => {
 // Cache of metadata per chainId
 const metadataCaches: Record<number, Record<string, TokenMetadata>> = {};
 
-// Load cache for a specific chain
-const loadCache = (chainId: number): Record<string, TokenMetadata> => {
+// Load cache for a specific chain (async to avoid blocking the event loop)
+const loadCache = async (
+  chainId: number
+): Promise<Record<string, TokenMetadata>> => {
   if (!metadataCaches[chainId]) {
     const cachePath = getCachePath(chainId);
     if (existsSync(cachePath)) {
       try {
-        metadataCaches[chainId] = JSON.parse(readFileSync(cachePath, "utf8"));
+        const data = await readFile(cachePath, "utf8");
+        metadataCaches[chainId] = JSON.parse(data);
       } catch (e) {
         console.error(
           `Error loading token metadata cache for chain ${chainId}:`,
@@ -138,11 +142,14 @@ const loadCache = (chainId: number): Record<string, TokenMetadata> => {
   return metadataCaches[chainId];
 };
 
-// Save cache for a specific chain
-const saveCache = (chainId: number): void => {
+// Save cache for a specific chain (async to avoid blocking the event loop)
+const saveCache = async (chainId: number): Promise<void> => {
   const cachePath = getCachePath(chainId);
   try {
-    writeFileSync(cachePath, JSON.stringify(metadataCaches[chainId], null, 2));
+    await writeFile(
+      cachePath,
+      JSON.stringify(metadataCaches[chainId], null, 2)
+    );
   } catch (e) {
     console.error(`Error saving token metadata cache for chain ${chainId}:`, e);
   }
@@ -161,7 +168,7 @@ export async function getTokenMetadata(
   chainId: number
 ): Promise<TokenMetadata> {
   // Load cache for this chain
-  const metadataCache = loadCache(chainId);
+  const metadataCache = await loadCache(chainId);
 
   // Handle native token
   if (address.toLowerCase() === ADDRESS_ZERO.toLowerCase()) {
@@ -199,7 +206,7 @@ export async function getTokenMetadata(
 
     // Update cache
     metadataCache[normalizedAddress] = metadata;
-    saveCache(chainId);
+    await saveCache(chainId);
 
     return metadata;
   } catch (e) {

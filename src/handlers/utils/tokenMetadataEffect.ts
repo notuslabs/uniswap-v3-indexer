@@ -1,6 +1,7 @@
 import { experimental_createEffect, S } from "envio";
 import { createPublicClient, http, getContract, type PublicClient } from "viem";
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 import { ADDRESS_ZERO } from "./constants";
 import { getChainConfig } from "./chains";
@@ -61,12 +62,12 @@ const getCachePath = (chainId: number): string => {
 const metadataCaches: Record<number, Record<string, any>> = {};
 
 // Load cache for a specific chain
-const loadCache = (chainId: number): Record<string, any> => {
+const loadCache = async (chainId: number): Promise<Record<string, any>> => {
   if (!metadataCaches[chainId]) {
     const cachePath = getCachePath(chainId);
     if (existsSync(cachePath)) {
       try {
-        metadataCaches[chainId] = JSON.parse(readFileSync(cachePath, "utf8"));
+        metadataCaches[chainId] = JSON.parse(await readFile(cachePath, "utf8"));
       } catch (e) {
         console.error(
           `Error loading token metadata cache for chain ${chainId}:`,
@@ -82,10 +83,13 @@ const loadCache = (chainId: number): Record<string, any> => {
 };
 
 // Save cache for a specific chain
-const saveCache = (chainId: number): void => {
+const saveCache = async (chainId: number): Promise<void> => {
   const cachePath = getCachePath(chainId);
   try {
-    writeFileSync(cachePath, JSON.stringify(metadataCaches[chainId], null, 2));
+    await writeFile(
+      cachePath,
+      JSON.stringify(metadataCaches[chainId], null, 2)
+    );
   } catch (e) {
     console.error(`Error saving token metadata cache for chain ${chainId}:`, e);
   }
@@ -152,7 +156,7 @@ export const getTokenMetadataEffect = experimental_createEffect(
     const normalizedAddress = address.toLowerCase();
 
     // Load cache for this chain
-    const metadataCache = loadCache(chainId);
+    const metadataCache = await loadCache(chainId);
 
     // Check cache first - use original address (with checksum) as cache key
     if (metadataCache[address]) {
@@ -174,7 +178,7 @@ export const getTokenMetadataEffect = experimental_createEffect(
 
         // Update cache - use original address as key
         metadataCache[address] = result;
-        saveCache(chainId);
+        await saveCache(chainId);
 
         return result;
       }
@@ -194,7 +198,7 @@ export const getTokenMetadataEffect = experimental_createEffect(
 
         // Update cache - use original address as key
         metadataCache[address] = result;
-        saveCache(chainId);
+        await saveCache(chainId);
 
         return result;
       }
@@ -277,12 +281,13 @@ export const getTokenMetadataEffect = experimental_createEffect(
 
       // Update cache - use original address as key
       metadataCache[address] = result;
-      saveCache(chainId);
+      await saveCache(chainId);
 
       return result;
     } catch (error) {
       context.log.error(
-        `Error fetching metadata for ${address} on chain ${chainId}: ${error}`
+        `Error fetching metadata for ${address} on chain ${chainId}`,
+        error as Error
       );
       return {
         name: "unknown",

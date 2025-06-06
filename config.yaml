@@ -37,45 +37,9 @@ contracts:
             - from
 
 networks:
-  - id: 1 # Ethereum Mainnet
-    start_block: 12369621
-    contracts:
-      - name: UniswapV3Factory
-        address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
-      - name: UniswapV3Pool
   - id: 137 # Polygon
-    start_block: 22757547
+    start_block: 72403106
     contracts:
       - name: UniswapV3Factory
         address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
-      - name: UniswapV3Pool
-  - id: 42161 # Arbitrum One
-    start_block: 165
-    contracts:
-      - name: UniswapV3Factory
-        address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
-      - name: UniswapV3Pool
-  - id: 10 # Optimism
-    start_block: 0
-    contracts:
-      - name: UniswapV3Factory
-        address: 0x1F98431c8aD98523631AE4a59f267346ea31F984
-      - name: UniswapV3Pool
-  - id: 43114 # Avalanche
-    start_block: 27832972
-    contracts:
-      - name: UniswapV3Factory
-        address: 0x740b1c1de25031C31FF4fC9A62f554A55cdC1baD
-      - name: UniswapV3Pool
-  - id: 8453 # Base
-    start_block: 1371680
-    contracts:
-      - name: UniswapV3Factory
-        address: 0x33128a8fC17869897dcE68Ed026d694621f6FDfD
-      - name: UniswapV3Pool
-  - id: 56 # Bsc
-    start_block: 26324014
-    contracts:
-      - name: UniswapV3Factory
-        address: 0xdB1d10011AD0Ff90774D0C6Bb92e5C5c8b4461F7
       - name: UniswapV3Pool

@@ -1,4 +1,4 @@
-import { BigDecimal, handlerContext, Transaction } from "generated";
+import { BigDecimal } from "generated";
 import { ZERO_BD, ONE_BD, ZERO_BI, ONE_BI } from "./constants";
 
 export function isAddressInList(address: string, list: string[]): boolean {

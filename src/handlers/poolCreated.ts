@@ -120,6 +120,7 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 				totalValueLockedUSDUntracked: ZERO_BD,
 				derivedETH: ZERO_BD,
 				whitelistPools: [],
+				supported: token0Metadata.supported,
 			};
 		}
 
@@ -144,6 +145,7 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 				totalValueLockedUSDUntracked: ZERO_BD,
 				derivedETH: ZERO_BD,
 				whitelistPools: [],
+				supported: token0Metadata.supported,
 			};
 		}
 
@@ -175,6 +177,7 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 			totalValueLockedUSD: ZERO_BD,
 			totalValueLockedUSDUntracked: ZERO_BD,
 			liquidityProviderCount: ZERO_BI,
+			supported: token0Metadata.supported && token1Metadata.supported,
 		};
 
 		// update white listed pools

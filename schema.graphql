@@ -66,6 +66,8 @@ type Token {
 	totalValueLockedUSD: BigDecimal!
 	# TVL derived in USD untracked
 	totalValueLockedUSDUntracked: BigDecimal!
+	# is token supported?
+	supported: Boolean!
 	# Note: for chains where ETH is not the native token, this will be the derived
 	# price of that chain's native token, effectively, this should be renamed
 	# derivedNative
@@ -129,6 +131,8 @@ type Pool {
 	totalValueLockedUSDUntracked: BigDecimal!
 	# Fields used to help derived relationship
 	liquidityProviderCount: BigInt! # used to detect new exchanges
+	# is pool tokens supported?
+	supported: Boolean!
 	# hourly snapshots of pool data
 	poolHourData: [PoolHourData!]! @derivedFrom(field: "pool")
 	# daily snapshots of pool data

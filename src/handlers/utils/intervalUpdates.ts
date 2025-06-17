@@ -24,8 +24,8 @@ export async function updatePoolDayData(
 				// things that dont get initialized always
 				volumeToken0: ZERO_BD,
 				volumeToken1: ZERO_BD,
-				volumeUSD: ZERO_BD,
-				feesUSD: ZERO_BD,
+				volumeUsd: ZERO_BD,
+				feesUsd: ZERO_BD,
 				txCount: ZERO_BI,
 				openingPrice: pool.token0Price,
 				high: pool.token0Price,
@@ -37,7 +37,7 @@ export async function updatePoolDayData(
 				token0Price: pool.token0Price,
 				token1Price: pool.token1Price,
 				tick: pool.tick,
-				tvlUSD: pool.totalValueLockedUSD,
+				tvlUsd: pool.totalValueLockedUsd,
 			};
 
 	if (pool.token0Price.gt(poolDayData.high)) {
@@ -54,7 +54,7 @@ export async function updatePoolDayData(
 	poolDayData.token1Price = pool.token1Price;
 	poolDayData.close = pool.token0Price;
 	poolDayData.tick = pool.tick;
-	poolDayData.tvlUSD = pool.totalValueLockedUSD;
+	poolDayData.tvlUsd = pool.totalValueLockedUsd;
 	poolDayData.txCount = poolDayData.txCount + ONE_BI;
 
 	context.PoolDayData.set(poolDayData);
@@ -79,9 +79,9 @@ export async function updatePoolHourData(
 			// things that dont get initialized always
 			volumeToken0: ZERO_BD,
 			volumeToken1: ZERO_BD,
-			volumeUSD: ZERO_BD,
+			volumeUsd: ZERO_BD,
 			txCount: ZERO_BI,
-			feesUSD: ZERO_BD,
+			feesUsd: ZERO_BD,
 			openingPrice: pool.token0Price,
 			high: pool.token0Price,
 			low: pool.token0Price,
@@ -92,7 +92,7 @@ export async function updatePoolHourData(
 			token0Price: ZERO_BD,
 			token1Price: ZERO_BD,
 			tick: undefined,
-			tvlUSD: ZERO_BD,
+			tvlUsd: ZERO_BD,
 		};
 	}
 
@@ -112,7 +112,7 @@ export async function updatePoolHourData(
 	poolHourData.token1Price = pool.token1Price;
 	poolHourData.close = pool.token0Price;
 	poolHourData.tick = pool.tick;
-	poolHourData.tvlUSD = pool.totalValueLockedUSD;
+	poolHourData.tvlUsd = pool.totalValueLockedUsd;
 	poolHourData.txCount = poolHourData.txCount + ONE_BI;
 
 	context.PoolHourData.set(poolHourData);

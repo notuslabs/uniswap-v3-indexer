@@ -90,3 +90,5 @@ export function convertTokenToDecimal(
 		? val
 		: val.div(exponentToBigDecimal(exchangeDecimals)).dp(4);
 }
+
+export type Writeable<T> = { -readonly [P in keyof T]: T[P] };

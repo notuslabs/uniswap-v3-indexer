@@ -52,7 +52,7 @@ UniswapV3Pool.Initialize.handlerWithLoader({
 		// update ETH price now that prices could have changed
 		bundle = {
 			...bundle,
-			ethPriceUSD: await getNativePriceInUSD(
+			ethPriceUsd: await getNativePriceInUSD(
 				context,
 				event.chainId,
 				stablecoinWrappedNativePoolId,
@@ -87,12 +87,12 @@ UniswapV3Pool.Initialize.handlerWithLoader({
 
 		token0 = {
 			...token0,
-			derivedETH: derivedETH_t0,
+			derivedEth: derivedETH_t0,
 		};
 
 		token1 = {
 			...token1,
-			derivedETH: derivedETH_t1,
+			derivedEth: derivedETH_t1,
 		};
 
 		context.Token.set(token0);

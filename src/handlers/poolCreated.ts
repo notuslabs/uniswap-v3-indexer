@@ -1,7 +1,13 @@
-import { UniswapV3Factory, type Bundle, type Pool } from "generated";
+import {
+	type Factory,
+	UniswapV3Factory,
+	type Bundle,
+	type Pool,
+	type Token,
+} from "generated";
 import { ZERO_BD, ZERO_BI, ONE_BI, ADDRESS_ZERO } from "./utils/constants";
 import { CHAIN_CONFIGS } from "./utils/chains";
-import { isAddressInList } from "./utils/index";
+import { isAddressInList, type Writeable } from "./utils/index";
 import { getTokenMetadataEffect } from "./utils/tokenMetadataEffect";
 
 UniswapV3Factory.PoolCreated.contractRegister(({ event, context }) => {
@@ -63,7 +69,7 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 			return;
 		}
 
-		let factory;
+		let factory: Writeable<Factory> | undefined;
 
 		if (factoryRO) {
 			factory = { ...factoryRO };
@@ -72,15 +78,15 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 				id: `${event.chainId}-${factoryAddress.toLowerCase()}`,
 				poolCount: ZERO_BI,
 				numberOfSwaps: ZERO_BI,
-				totalVolumeETH: ZERO_BD,
-				totalVolumeUSD: ZERO_BD,
-				untrackedVolumeUSD: ZERO_BD,
-				totalFeesUSD: ZERO_BD,
-				totalFeesETH: ZERO_BD,
-				totalValueLockedETH: ZERO_BD,
-				totalValueLockedUSD: ZERO_BD,
-				totalValueLockedUSDUntracked: ZERO_BD,
-				totalValueLockedETHUntracked: ZERO_BD,
+				totalVolumeEth: ZERO_BD,
+				totalVolumeUsd: ZERO_BD,
+				untrackedVolumeUsd: ZERO_BD,
+				totalFeesUsd: ZERO_BD,
+				totalFeesEth: ZERO_BD,
+				totalValueLockedEth: ZERO_BD,
+				totalValueLockedUsd: ZERO_BD,
+				totalValueLockedUsdUntracked: ZERO_BD,
+				totalValueLockedEthUntracked: ZERO_BD,
 				txCount: ZERO_BI,
 				owner: ADDRESS_ZERO,
 			};
@@ -88,7 +94,7 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 			// create new bundle for tracking eth price
 			const bundle: Bundle = {
 				id: event.chainId.toString(),
-				ethPriceUSD: ZERO_BD,
+				ethPriceUsd: ZERO_BD,
 			};
 
 			context.Bundle.set(bundle);
@@ -97,7 +103,7 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 		factory.poolCount = factory.poolCount + ONE_BI;
 
 		// Create token objects using the metadata we fetched in the loader
-		const tokens = [];
+		const tokens: Writeable<Token>[] = [];
 
 		// Create token0
 		if (token0RO) {
@@ -110,15 +116,15 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 				decimals: BigInt(token0Metadata.decimals),
 				isWhitelisted: isAddressInList(token0Address, whitelistTokens),
 				volume: ZERO_BD,
-				volumeUSD: ZERO_BD,
-				untrackedVolumeUSD: ZERO_BD,
-				feesUSD: ZERO_BD,
+				volumeUsd: ZERO_BD,
+				untrackedVolumeUsd: ZERO_BD,
+				feesUsd: ZERO_BD,
 				txCount: ZERO_BI,
 				poolCount: ZERO_BI,
 				totalValueLocked: ZERO_BD,
-				totalValueLockedUSD: ZERO_BD,
-				totalValueLockedUSDUntracked: ZERO_BD,
-				derivedETH: ZERO_BD,
+				totalValueLockedUsd: ZERO_BD,
+				totalValueLockedUsdUntracked: ZERO_BD,
+				derivedEth: ZERO_BD,
 				whitelistPools: [],
 				supported: token0Metadata.supported,
 			};
@@ -135,15 +141,15 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 				decimals: BigInt(token1Metadata.decimals),
 				isWhitelisted: isAddressInList(token1Address, whitelistTokens),
 				volume: ZERO_BD,
-				volumeUSD: ZERO_BD,
-				untrackedVolumeUSD: ZERO_BD,
-				feesUSD: ZERO_BD,
+				volumeUsd: ZERO_BD,
+				untrackedVolumeUsd: ZERO_BD,
+				feesUsd: ZERO_BD,
 				txCount: ZERO_BI,
 				poolCount: ZERO_BI,
 				totalValueLocked: ZERO_BD,
-				totalValueLockedUSD: ZERO_BD,
-				totalValueLockedUSDUntracked: ZERO_BD,
-				derivedETH: ZERO_BD,
+				totalValueLockedUsd: ZERO_BD,
+				totalValueLockedUsdUntracked: ZERO_BD,
+				derivedEth: ZERO_BD,
 				whitelistPools: [],
 				supported: token0Metadata.supported,
 			};
@@ -164,20 +170,21 @@ UniswapV3Factory.PoolCreated.handlerWithLoader({
 			observationIndex: ZERO_BI,
 			volumeToken0: ZERO_BD,
 			volumeToken1: ZERO_BD,
-			volumeUSD: ZERO_BD,
-			untrackedVolumeUSD: ZERO_BD,
-			feesUSD: ZERO_BD,
+			volumeUsd: ZERO_BD,
+			untrackedVolumeUsd: ZERO_BD,
+			feesUsd: ZERO_BD,
 			txCount: ZERO_BI,
 			collectedFeesToken0: ZERO_BD,
 			collectedFeesToken1: ZERO_BD,
-			collectedFeesUSD: ZERO_BD,
+			collectedFeesUsd: ZERO_BD,
 			totalValueLockedToken0: ZERO_BD,
 			totalValueLockedToken1: ZERO_BD,
-			totalValueLockedETH: ZERO_BD,
-			totalValueLockedUSD: ZERO_BD,
-			totalValueLockedUSDUntracked: ZERO_BD,
+			totalValueLockedEth: ZERO_BD,
+			totalValueLockedUsd: ZERO_BD,
+			totalValueLockedUsdUntracked: ZERO_BD,
 			liquidityProviderCount: ZERO_BI,
 			supported: token0Metadata.supported && token1Metadata.supported,
+			chainId: event.chainId,
 		};
 
 		// update white listed pools

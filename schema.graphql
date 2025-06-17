@@ -7,34 +7,34 @@ type Factory {
 	txCount: BigInt!
 	# total number of swaps across all the pools
 	numberOfSwaps: BigInt!
-	# total volume all time in derived USD
-	totalVolumeUSD: BigDecimal!
-	# total volume all time in derived ETH
-	totalVolumeETH: BigDecimal!
-	# total swap fees all time in USD
-	totalFeesUSD: BigDecimal!
-	# total swap fees all time in USD
-	totalFeesETH: BigDecimal!
-	# all volume even through less reliable USD values
-	untrackedVolumeUSD: BigDecimal!
-	# TVL derived in USD
-	totalValueLockedUSD: BigDecimal!
-	# TVL derived in ETH
-	totalValueLockedETH: BigDecimal!
-	# TVL derived in USD untracked
-	totalValueLockedUSDUntracked: BigDecimal!
-	# TVL derived in ETH untracked
-	totalValueLockedETHUntracked: BigDecimal!
+	# total volume all time in derived Usd
+	totalVolumeUsd: BigDecimal!
+	# total volume all time in derived Eth
+	totalVolumeEth: BigDecimal!
+	# total swap fees all time in Usd
+	totalFeesUsd: BigDecimal!
+	# total swap fees all time in Usd
+	totalFeesEth: BigDecimal!
+	# all volume even through less reliable Usd values
+	untrackedVolumeUsd: BigDecimal!
+	# TVL derived in Usd
+	totalValueLockedUsd: BigDecimal!
+	# TVL derived in Eth
+	totalValueLockedEth: BigDecimal!
+	# TVL derived in Usd untracked
+	totalValueLockedUsdUntracked: BigDecimal!
+	# TVL derived in Eth untracked
+	totalValueLockedEthUntracked: BigDecimal!
 
 	# current owner of the factory
 	owner: ID!
 }
 
-# stores for USD calculations
+# stores for Usd calculations
 type Bundle {
 	id: ID!
-	# price of ETH in usd
-	ethPriceUSD: BigDecimal!
+	# price of Eth in usd
+	ethPriceUsd: BigDecimal!
 }
 
 type Token {
@@ -50,35 +50,37 @@ type Token {
 	isWhitelisted: Boolean!
 	# volume in token units
 	volume: BigDecimal!
-	# volume in derived USD
-	volumeUSD: BigDecimal!
-	# volume in USD even on pools with less reliable USD values
-	untrackedVolumeUSD: BigDecimal!
-	# fees in USD
-	feesUSD: BigDecimal!
+	# volume in derived Usd
+	volumeUsd: BigDecimal!
+	# volume in Usd even on pools with less reliable Usd values
+	untrackedVolumeUsd: BigDecimal!
+	# fees in Usd
+	feesUsd: BigDecimal!
 	# transactions across all pools that include this token
 	txCount: BigInt!
 	# number of pools containing this token
 	poolCount: BigInt! @index
 	# liquidity across all pools in token units
 	totalValueLocked: BigDecimal!
-	# liquidity across all pools in derived USD
-	totalValueLockedUSD: BigDecimal!
-	# TVL derived in USD untracked
-	totalValueLockedUSDUntracked: BigDecimal!
+	# liquidity across all pools in derived Usd
+	totalValueLockedUsd: BigDecimal!
+	# TVL derived in Usd untracked
+	totalValueLockedUsdUntracked: BigDecimal!
 	# is token supported?
 	supported: Boolean!
-	# Note: for chains where ETH is not the native token, this will be the derived
+	# Note: for chains where Eth is not the native token, this will be the derived
 	# price of that chain's native token, effectively, this should be renamed
 	# derivedNative
-	derivedETH: BigDecimal!
-	# pools token is in that are white listed for USD pricing
+	derivedEth: BigDecimal!
+	# pools token is in that are white listed for Usd pricing
 	whitelistPools: [String!]! # Pool ids
 }
 
 type Pool {
 	# pool address
 	id: ID!
+	# chain id
+	chainId: Int! @index
 	# creation
 	createdAtTimestamp: BigInt!
 	# block pool was created at
@@ -105,30 +107,30 @@ type Pool {
 	volumeToken0: BigDecimal!
 	# all time token1 swapped
 	volumeToken1: BigDecimal!
-	# all time USD swapped
-	volumeUSD: BigDecimal!
-	# all time USD swapped, unfiltered for unreliable USD pools
-	untrackedVolumeUSD: BigDecimal!
-	# fees in USD
-	feesUSD: BigDecimal!
+	# all time Usd swapped
+	volumeUsd: BigDecimal!
+	# all time Usd swapped, unfiltered for unreliable Usd pools
+	untrackedVolumeUsd: BigDecimal!
+	# fees in Usd
+	feesUsd: BigDecimal!
 	# all time number of transactions
 	txCount: BigInt!
 	# all time fees collected token0
 	collectedFeesToken0: BigDecimal!
 	# all time fees collected token1
 	collectedFeesToken1: BigDecimal!
-	# all time fees collected derived USD
-	collectedFeesUSD: BigDecimal!
+	# all time fees collected derived Usd
+	collectedFeesUsd: BigDecimal!
 	# total token 0 across all ticks
 	totalValueLockedToken0: BigDecimal!
 	# total token 1 across all ticks
 	totalValueLockedToken1: BigDecimal!
-	# tvl derived ETH
-	totalValueLockedETH: BigDecimal!
-	# tvl USD
-	totalValueLockedUSD: BigDecimal!
-	# TVL derived in USD untracked
-	totalValueLockedUSDUntracked: BigDecimal!
+	# tvl derived Eth
+	totalValueLockedEth: BigDecimal!
+	# tvl Usd
+	totalValueLockedUsd: BigDecimal!
+	# TVL derived in Usd untracked
+	totalValueLockedUsdUntracked: BigDecimal!
 	# Fields used to help derived relationship
 	liquidityProviderCount: BigInt! # used to detect new exchanges
 	# is pool tokens supported?
@@ -180,16 +182,16 @@ type PoolDayData {
 	token1Price: BigDecimal!
 	# current tick at end of period
 	tick: BigInt
-	# tvl derived in USD at end of period
-	tvlUSD: BigDecimal!
+	# tvl derived in Usd at end of period
+	tvlUsd: BigDecimal!
 	# volume in token0
 	volumeToken0: BigDecimal!
 	# volume in token1
 	volumeToken1: BigDecimal!
-	# volume in USD
-	volumeUSD: BigDecimal!
-	# fees in USD
-	feesUSD: BigDecimal!
+	# volume in Usd
+	volumeUsd: BigDecimal!
+	# fees in Usd
+	feesUsd: BigDecimal!
 	# numebr of transactions during period
 	txCount: BigInt!
 	# opening price of token0
@@ -220,16 +222,16 @@ type PoolHourData {
 	token1Price: BigDecimal!
 	# current tick at end of period
 	tick: BigInt
-	# tvl derived in USD at end of period
-	tvlUSD: BigDecimal!
+	# tvl derived in Usd at end of period
+	tvlUsd: BigDecimal!
 	# volume in token0
 	volumeToken0: BigDecimal!
 	# volume in token1
 	volumeToken1: BigDecimal!
-	# volume in USD
-	volumeUSD: BigDecimal!
-	# fees in USD
-	feesUSD: BigDecimal!
+	# volume in Usd
+	volumeUsd: BigDecimal!
+	# fees in Usd
+	feesUsd: BigDecimal!
 	# numebr of transactions during period
 	txCount: BigInt!
 	# opening price of token0

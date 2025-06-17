@@ -69,8 +69,8 @@ UniswapV3Pool.Collect.handlerWithLoader({
 		);
 
 		// Reset tvl aggregates until new amounts calculated
-		factory.totalValueLockedETH = factory.totalValueLockedETH.minus(
-			pool.totalValueLockedETH,
+		factory.totalValueLockedEth = factory.totalValueLockedEth.minus(
+			pool.totalValueLockedEth,
 		);
 
 		// Update globals
@@ -81,16 +81,16 @@ UniswapV3Pool.Collect.handlerWithLoader({
 		token0.totalValueLocked = token0.totalValueLocked.minus(
 			collectedAmountToken0,
 		);
-		token0.totalValueLockedUSD = token0.totalValueLocked.times(
-			token0.derivedETH.times(bundle.ethPriceUSD),
+		token0.totalValueLockedUsd = token0.totalValueLocked.times(
+			token0.derivedEth.times(bundle.ethPriceUsd),
 		);
 
 		token1.txCount = token1.txCount + ONE_BI;
 		token1.totalValueLocked = token1.totalValueLocked.minus(
 			collectedAmountToken1,
 		);
-		token1.totalValueLockedUSD = token1.totalValueLocked.times(
-			token1.derivedETH.times(bundle.ethPriceUSD),
+		token1.totalValueLockedUsd = token1.totalValueLocked.times(
+			token1.derivedEth.times(bundle.ethPriceUsd),
 		);
 
 		// Adjust pool TVL based on amount collected.
@@ -101,11 +101,11 @@ UniswapV3Pool.Collect.handlerWithLoader({
 		pool.totalValueLockedToken1 = pool.totalValueLockedToken1.minus(
 			collectedAmountToken1,
 		);
-		pool.totalValueLockedETH = pool.totalValueLockedToken0
-			.times(token0.derivedETH)
-			.plus(pool.totalValueLockedToken1.times(token1.derivedETH));
-		pool.totalValueLockedUSD = pool.totalValueLockedETH.times(
-			bundle.ethPriceUSD,
+		pool.totalValueLockedEth = pool.totalValueLockedToken0
+			.times(token0.derivedEth)
+			.plus(pool.totalValueLockedToken1.times(token1.derivedEth));
+		pool.totalValueLockedUsd = pool.totalValueLockedEth.times(
+			bundle.ethPriceUsd,
 		);
 
 		// Update aggregate fee collection values.
@@ -115,16 +115,16 @@ UniswapV3Pool.Collect.handlerWithLoader({
 		pool.collectedFeesToken1 = pool.collectedFeesToken1.plus(
 			collectedAmountToken1,
 		);
-		pool.collectedFeesUSD = pool.collectedFeesUSD.plus(
+		pool.collectedFeesUsd = pool.collectedFeesUsd.plus(
 			trackedCollectedAmountUSD,
 		);
 
 		// reset aggregates with new amounts
-		factory.totalValueLockedETH = factory.totalValueLockedETH.plus(
-			pool.totalValueLockedETH,
+		factory.totalValueLockedEth = factory.totalValueLockedEth.plus(
+			pool.totalValueLockedEth,
 		);
-		factory.totalValueLockedUSD = factory.totalValueLockedETH.times(
-			bundle.ethPriceUSD,
+		factory.totalValueLockedUsd = factory.totalValueLockedEth.times(
+			bundle.ethPriceUsd,
 		);
 
 		intervalUpdates.updatePoolDayData(timestamp, pool, context);

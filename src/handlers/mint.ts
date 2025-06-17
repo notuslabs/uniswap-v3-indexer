@@ -73,8 +73,8 @@ UniswapV3Pool.Mint.handlerWithLoader({
 		);
 
 		// reset tvl aggregates until new amounts calculated
-		factory.totalValueLockedETH = factory.totalValueLockedETH.minus(
-			pool.totalValueLockedETH,
+		factory.totalValueLockedEth = factory.totalValueLockedEth.minus(
+			pool.totalValueLockedEth,
 		);
 
 		// update globals
@@ -83,15 +83,15 @@ UniswapV3Pool.Mint.handlerWithLoader({
 		// update token0 data
 		token0.txCount = token0.txCount + ONE_BI;
 		token0.totalValueLocked = token0.totalValueLocked.plus(amount0);
-		token0.totalValueLockedUSD = token0.totalValueLocked.times(
-			token0.derivedETH.times(bundle.ethPriceUSD),
+		token0.totalValueLockedUsd = token0.totalValueLocked.times(
+			token0.derivedEth.times(bundle.ethPriceUsd),
 		);
 
 		// update token1 data
 		token1.txCount = token1.txCount + ONE_BI;
 		token1.totalValueLocked = token1.totalValueLocked.plus(amount1);
-		token1.totalValueLockedUSD = token1.totalValueLocked.times(
-			token1.derivedETH.times(bundle.ethPriceUSD),
+		token1.totalValueLockedUsd = token1.totalValueLocked.times(
+			token1.derivedEth.times(bundle.ethPriceUsd),
 		);
 
 		// pool data
@@ -109,19 +109,19 @@ UniswapV3Pool.Mint.handlerWithLoader({
 
 		pool.totalValueLockedToken0 = pool.totalValueLockedToken0.plus(amount0);
 		pool.totalValueLockedToken1 = pool.totalValueLockedToken1.plus(amount1);
-		pool.totalValueLockedETH = pool.totalValueLockedToken0
-			.times(token0.derivedETH)
-			.plus(pool.totalValueLockedToken1.times(token1.derivedETH));
-		pool.totalValueLockedUSD = pool.totalValueLockedETH.times(
-			bundle.ethPriceUSD,
+		pool.totalValueLockedEth = pool.totalValueLockedToken0
+			.times(token0.derivedEth)
+			.plus(pool.totalValueLockedToken1.times(token1.derivedEth));
+		pool.totalValueLockedUsd = pool.totalValueLockedEth.times(
+			bundle.ethPriceUsd,
 		);
 
 		// reset aggregates with new amounts
-		factory.totalValueLockedETH = factory.totalValueLockedETH.plus(
-			pool.totalValueLockedETH,
+		factory.totalValueLockedEth = factory.totalValueLockedEth.plus(
+			pool.totalValueLockedEth,
 		);
-		factory.totalValueLockedUSD = factory.totalValueLockedETH.times(
-			bundle.ethPriceUSD,
+		factory.totalValueLockedUsd = factory.totalValueLockedEth.times(
+			bundle.ethPriceUsd,
 		);
 
 		// tick entities

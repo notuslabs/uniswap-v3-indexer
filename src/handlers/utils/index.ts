@@ -16,6 +16,10 @@ export function isAddressInList(address: string, list: string[]): boolean {
 export function exponentToBigDecimal(decimals: bigint): BigDecimal {
 	let resultString = "1";
 
+	if (decimals > 255n) {
+		return ZERO_BD;
+	}
+
 	for (let i = 0n; i < decimals; i++) {
 		resultString += "0";
 	}

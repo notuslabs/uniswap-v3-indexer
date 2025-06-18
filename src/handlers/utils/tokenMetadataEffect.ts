@@ -261,6 +261,18 @@ export const getTokenMetadataEffect = experimental_createEffect(
 			const symbolBytes32Result = results[3] as string | null;
 			const decimalsResult = results[4];
 
+			if (typeof decimalsResult === "number" && decimalsResult > 255) {
+				context.log.error(
+					`Decimals too large for token ${address} on chain ${chainId}`,
+				);
+				return {
+					name: "unknown",
+					symbol: "UNKNOWN",
+					decimals: 18,
+					supported,
+				};
+			}
+
 			// Process name with fallbacks
 			let name = "unknown";
 			if (nameResult !== null) {

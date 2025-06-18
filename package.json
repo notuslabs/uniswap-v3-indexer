@@ -22,11 +22,7 @@
     "typescript": "5.2.2"
   },
   "dependencies": {
-    "@keyv/redis": "^4.4.0",
-    "cache-manager": "^7.0.0",
-    "cacheable": "^1.10.0",
-    "envio": "2.22.3",
-    "keyv": "^5.3.4"
+    "envio": "2.22.3"
   },
   "optionalDependencies": {
     "generated": "link:generated"
